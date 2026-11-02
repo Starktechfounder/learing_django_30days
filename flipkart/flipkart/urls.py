@@ -20,8 +20,9 @@ from flipkart import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("",views.home_view),
-    path("about/",views.about_view),
-    path("contact/",views.contact_view),
-    path("sales/",views.sales_view)
+    path("", views.home_view, name='home'),
+    path("about/", views.about_view, name='about'),
+    path("contact/", views.contact_view, name='contact'),
+    path("login/", views.login_view, name='login'),
+    path("signup/", views.signup_view, name='signup'),
 ]

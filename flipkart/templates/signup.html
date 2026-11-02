@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Flipkart</title>
+    <!-- Tailwind CSS CDN for a clean, attractive, and responsive design -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        flipkartBlue: '#2874f0',
+                        flipkartYellow: '#fffae6',
+                        flipkartOrange: '#fb641b',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col justify-between font-sans">
+
+    <!-- Header / Navbar -->
+    <header class="bg-flipkartBlue shadow-md py-3 px-6 flex items-center justify-between">
+        <div class="flex items-center space-x-2">
+            <a href="{% url 'home' %}" class="text-white text-2xl font-bold italic tracking-wide flex items-center">
+                Flipkart <span class="text-yellow-400 text-xs not-italic font-semibold ml-1 bg-yellow-500/20 px-1.5 py-0.5 rounded">Explore Plus</span>
+            </a>
+        </div>
+        <div>
+            <a href="{% url 'login' %}" class="bg-white text-flipkartBlue font-medium px-4 py-1.5 rounded shadow hover:bg-gray-50 transition text-sm">
+                Existing User? Log in
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Signup Container -->
+    <main class="flex-grow flex items-center justify-center px-4 py-12">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-4xl flex overflow-hidden border border-gray-200">
+
+            <!-- Left Brand Banner Panel -->
+            <div class="hidden lg:flex lg:w-2/5 bg-flipkartBlue text-white p-10 flex-col justify-between relative overflow-hidden">
+                <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-blue-600 rounded-full opacity-50 pointer-events-none"></div>
+                <div class="absolute -left-10 -top-10 w-36 h-36 bg-blue-400 rounded-full opacity-30 pointer-events-none"></div>
+
+                <div class="relative z-10">
+                    <h2 class="text-3xl font-bold mb-3">Looks like you're new here!</h2>
+                    <p class="text-blue-100 text-sm leading-relaxed">
+                        Sign up with your mobile number or email to get started with your shopping journey.
+                    </p>
+                </div>
+
+                <div class="relative z-10 my-auto py-8 text-center">
+                    <div class="inline-block p-4 bg-white/10 rounded-full mb-4">
+                        <i class="fa-solid fa-user-plus text-5xl text-yellow-400"></i>
+                    </div>
+                    <p class="text-xs text-blue-200">Access your wishlist, track orders, and get personalized recommendations.</p>
+                </div>
+
+                <div class="relative z-10 text-xs text-blue-200">
+                    By continuing, you agree to Flipkart's <a href="#" class="underline hover:text-white">Terms of Use</a> and <a href="#" class="underline hover:text-white">Privacy Policy</a>.
+                </div>
+            </div>
+
+            <!-- Right Form Panel -->
+            <div class="w-full lg:w-3/5 p-8 sm:p-12 flex flex-col justify-center">
+
+                <div class="mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">Create Account</h3>
+                    <p class="text-sm text-gray-500 mt-1">Please fill in the details below to register.</p>
+                </div>
+
+                <!-- Django Error Handling Display -->
+                {% if form.errors %}
+                <div class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-sm rounded shadow-sm flex items-start space-x-2">
+                    <i class="fa-solid fa-circle-exclamation mt-0.5 text-red-500"></i>
+                    <div>
+                        <span class="font-semibold">Please correct the error(s) below.</span>
+                        {% if form.non_field_errors %}
+                            <ul class="mt-1 list-disc list-inside">
+                            {% for error in form.non_field_errors %}
+                                <li>{{ error }}</li>
+                            {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <!-- Signup Form -->
+                <form action="" method="POST" class="space-y-4" id="signup-form">
+                    {% csrf_token %}
+
+                    <!-- Username Field -->
+                    <div>
+                        <label for="{{ form.username.id_for_label }}" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">
+                            Username
+                        </label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                                value="{{ form.username.value|default:'' }}" required
+                                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-flipkartBlue focus:border-transparent text-sm transition"
+                                placeholder="Choose a username">
+                        </div>
+                        {% if form.username.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.username.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Email Field (if applicable in form) -->
+                    {% if form.email %}
+                    <div>
+                        <label for="{{ form.email.id_for_label }}" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">
+                            Email Address
+                        </label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fa-solid fa-envelope"></i>
+                            </div>
+                            <input type="email" name="{{ form.email.name }}" id="{{ form.email.id_for_label }}"
+                                value="{{ form.email.value|default:'' }}"
+                                class="block w-full pl-10 pr-3 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-flipkartBlue focus:border-transparent text-sm transition"
+                                placeholder="name@example.com">
+                        </div>
+                        {% if form.email.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.email.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Password Field -->
+                    <div>
+                        <label for="{{ form.password1.id_for_label }}" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">
+                            Password
+                        </label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fa-solid fa-lock"></i>
+                            </div>
+                            <input type="password" name="{{ form.password1.name }}" id="{{ form.password1.id_for_label }}" required
+                                class="block w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-flipkartBlue focus:border-transparent text-sm transition"
+                                placeholder="••••••••">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-400 hover:text-gray-600" onclick="togglePassword('{{ form.password1.id_for_label }}', 'toggleIcon1')">
+                                <i id="toggleIcon1" class="fa-solid fa-eye text-sm"></i>
+                            </div>
+                        </div>
+                        {% if form.password1.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.password1.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+
+                    <!-- Confirm Password Field (if using standard UserCreationForm with password2) -->
+                    {% if form.password2 %}
+                    <div>
+                        <label for="{{ form.password2.id_for_label }}" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">
+                            Confirm Password
+                        </label>
+                        <div class="relative rounded-md shadow-sm">
+                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+                                <i class="fa-solid fa-lock-open"></i>
+                            </div>
+                            <input type="password" name="{{ form.password2.name }}" id="{{ form.password2.id_for_label }}" required
+                                class="block w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-flipkartBlue focus:border-transparent text-sm transition"
+                                placeholder="••••••••">
+                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center cursor-pointer text-gray-400 hover:text-gray-600" onclick="togglePassword('{{ form.password2.id_for_label }}', 'toggleIcon2')">
+                                <i id="toggleIcon2" class="fa-solid fa-eye text-sm"></i>
+                            </div>
+                        </div>
+                        {% if form.password2.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ form.password2.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                    {% endif %}
+
+                    <!-- Submit Button -->
+                    <div class="pt-2">
+                        <button type="submit" class="w-full bg-flipkartOrange hover:bg-orange-600 text-white font-semibold py-3 px-4 rounded-lg shadow-md transition duration-200 flex items-center justify-center space-x-2 text-sm tracking-wide">
+                            <span>Continue</span>
+                            <i class="fa-solid fa-arrow-right-long text-xs"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Footer Links / Login Prompt -->
+                <div class="mt-6 text-center text-sm text-gray-600">
+                    Already have an account?
+                    <a href="{% url 'login' %}" class="text-flipkartBlue font-semibold hover:underline ml-1">
+                        Log in here
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Simple Footer -->
+    <footer class="bg-gray-800 text-gray-400 text-xs py-4 text-center">
+        <p>&copy; 2026 Flipkart Clone. Built with Django & Tailwind CSS.</p>
+    </footer>
+
+    <!-- Password Visibility Script -->
+    <script>
+        function togglePassword(fieldId, iconId) {
+            const passwordInput = document.getElementById(fieldId);
+            const toggleIcon = document.getElementById(iconId);
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>
