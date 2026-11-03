@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'styles/index.css' %}">
+    <style>
+        .hero-img {
+            max-width: 300px;
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+    </style>
+    <title>Logged Out</title>
+</head>
+<body>
+    <h1>You have been logged out</h1>
+    <p>Thank you for visiting.</p>
+
+    <div>
+        <img src="{% static 'images/image2.jpg' %}" alt="Iron Man" class="hero-img">
+    </div>
+
+    <script src="{% static 'scripts/greeting.js' %}"></script>
+</body>
+</html>
