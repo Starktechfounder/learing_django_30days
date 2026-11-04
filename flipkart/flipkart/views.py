@@ -15,8 +15,5 @@ def login_view(request):
     form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
 
-def signup_view(request):
-    form = UserCreationForm()
-    return render(request, 'signup.html', {'form': form})
 
 
