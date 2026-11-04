@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+	<p>This is the home page of our Django site. Feel free to explore and learn more about us.</p>
+	<p><a href="{% url 'about' %}">About Us</a> | <a href="{% url 'contact' %}">Contact Us</a></p>
+{% endblock %}
