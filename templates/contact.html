@@ -1,32 +1,28 @@
-{% extends "base.html" %}
-{% load static %}
-{% block title %}Contact Us - Django Practice{% endblock %}
-{% block content %}
-<div class="section" style="max-width: 600px; margin: 0 auto;">
-    <h2>Contact Us</h2>
-    <p class="section-intro">Have a question or want to get in touch? Send us a message below.</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contact Us</title>
+</head>
+<body>
+	<main>
+		<h1>Contact Us</h1>
+		<p>Have a question? Send us a message.</p>
 
-    <div class="card" style="margin-top: 2rem;">
-        <form method="post">
-            {% csrf_token %}
-            <div style="margin-bottom: 1.25rem;">
-                <label for="name" style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Name</label>
-                <input type="text" id="name" name="name" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 0.5rem;">
-            </div>
+		<form action="" method="post">
+			{% csrf_token %}
+			<label for="name">Name</label>
+			<input type="text" id="name" name="name" required>
 
-            <div style="margin-bottom: 1.25rem;">
-                <label for="email" style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Email</label>
-                <input type="email" id="email" name="email" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 0.5rem;">
-            </div>
+			<label for="email">Email</label>
+			<input type="email" id="email" name="email" required>
 
-            <div style="margin-bottom: 1.5rem;">
-                <label for="message" style="display: block; font-weight: 500; margin-bottom: 0.5rem;">Message</label>
-                <textarea id="message" name="message" rows="5" required style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border); border-radius: 0.5rem;"></textarea>
-            </div>
+			<label for="message">Message</label>
+			<textarea id="message" name="message" rows="5" required></textarea>
 
-            <button type="submit" class="button" style="width: 100%;">Send Message</button>
-        </form>
-    </div>
-    <p style="margin-top: 1.5rem;"><a href="{% url 'home' %}">&larr; Return to home page</a></p>
-</div>
-{% endblock %}
+			<button type="submit">Send Message</button>
+		</form>
+	</main>
+</body>
+</html>

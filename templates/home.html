@@ -1,15 +1,6 @@
 {% extends "base.html" %}
-{% load static %}
-{% block title %}Home - Django Practice{% endblock %}
+{% block title %}Home{% endblock %}
 {% block content %}
-<section class="hero">
-    <div class="hero-content">
-        <h1 id="greeting">Welcome to our website</h1>
-        <p>Explore our Django practice project featuring clean templates, robust contact management, and modern styling.</p>
-        <div style="display: flex; gap: 1rem; margin-top: 2rem;">
-            <a href="{% url 'about' %}" class="button">Learn More About Us</a>
-            <a href="{% url 'contact' %}" class="button button-secondary">Contact Us</a>
-        </div>
-    </div>
-</section>
+	<p>This is the home page of our Django site. Feel free to explore and learn more about us.</p>
+	<p><a href="{% url 'about' %}">About Us</a> | <a href="{% url 'contact' %}">Contact Us</a></p>
 {% endblock %}
