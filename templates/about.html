@@ -1,31 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>About Us</title>
-	<style>
-		body { margin: 0; font-family: Arial, sans-serif; line-height: 1.6; color: #263248; background: #f3f6fb; }
-		main { max-width: 720px; margin: 60px auto; padding: 36px; background: white; border-radius: 12px; box-shadow: 0 8px 24px #182b4414; }
-		h1 { color: #2457a7; }
-		a { color: #2457a7; }
-		@media (max-width: 600px) { main { margin: 20px; padding: 24px; } }
-	</style>
-</head>
-<body>
-	<main>
-		<h1>About Us</h1>
-		<p>Welcome to our website! We are a friendly team focused on creating useful, dependable experiences for our community.</p>
-		<h2>Our mission</h2>
-		<p>We believe good work starts with listening, learning, and paying attention to the details. Our aim is to make everyday things a little easier and better.</p>
-		<h2>Our values</h2>
-		<ul>
-			<li>People come first</li>
-			<li>Curiosity and continuous learning</li>
-			<li>Care and quality in everything we do</li>
-		</ul>
-		<p>Have a question? <a href="mailto:hello@example.com">Get in touch</a>.</p>
-		<p><a href="/">Return to the home page</a></p>
-	</main>
-</body>
-</html>
+{% extends "base.html" %}
+{% load static %}
+{% block title %}About Us - Django Practice{% endblock %}
+{% block content %}
+<div class="section" style="max-width: 720px; margin: 0 auto;">
+    <h2>About Us</h2>
+    <p class="section-intro">Welcome to our website! We are a friendly team focused on creating useful, dependable experiences for our community.</p>
+
+    <div class="card" style="margin-top: 2rem;">
+        <h3>Our Mission</h3>
+        <p>We believe good work starts with listening, learning, and paying attention to the details. Our aim is to make everyday things a little easier and better.</p>
+
+        <h3 style="margin-top: 1.5rem;">Our Values</h3>
+        <ul style="margin: 0.5rem 0 0 1.25rem; color: var(--color-muted);">
+            <li>People come first</li>
+            <li>Curiosity and continuous learning</li>
+            <li>Care and quality in everything we do</li>
+        </ul>
+
+        <p style="margin-top: 1.5rem;">Have a question? <a href="{% url 'contact' %}">Get in touch</a>.</p>
+    </div>
+    <p style="margin-top: 1.5rem;"><a href="{% url 'home' %}">&larr; Return to home page</a></p>
+</div>
+{% endblock %}
